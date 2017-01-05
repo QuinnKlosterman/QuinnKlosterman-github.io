@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>  </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open("target", 800,500);
+				var player = new sjs.Image("Images/playerR.png");
+				player.friction = .5;
+				player.accel = .5;
+				player.setHFlipImages("Images/playerR.png", "Images/playerL.png");
+				player.setSize(80, 60)
+				player.centerV()
+				var enemy = new sjs.Image("Images/enemy.png");
+				enemy.setSize(80, 60)
+				enemy.centerV().right()
+				enemy.friction =  .3
+				enemy.accel = .5
+				var fire = true
+				var laser;
+				var move = true
+				sjs.keyDown(DOWN_KEY, function(){
+					player.pushDown(2)
+				})
+				sjs.keyDown(UP_KEY, function(){
+					player.pushUp(2)
+				})
+				sjs.keyDown(SPACE_KEY, function(){
+					if(fire == true){
+						laser = new sjs.Image("Images/laser.png");
+						laser.moveTo(player.getX() + player.getWidth(),player.getY() + player.getHeight()/2);
+						laser.pushRight(20)
+						laser.setSize(20,2)
+						laser.noBounds = true
+						laser.friction = 0
+						laser.accel = 1
+						fire = false
+						move = false
+						setTimeout(function(){
+							laser.destroy()
+							fire = true
+						}, 2000)
+					
+						setTimeout(function(){
+							if(laser.getY() - enemy.getY() <= enemy.getHeight() && laser.getY() - enemy.getY() >= 0){
+								if(enemy.getY() - laser.getY() < laser.getY() - enemy.getY()){
+									enemy.pushUp(5)
+									setTimeout(function(){
+										enemy.pushDown(5)
+									}, 1000)
+								}
+								else{
+									enemy.pushDown(5)
+									setTimeout(function(){
+										enemy.pushUp(5)
+									}, 1000)
+								}
+							}
+						},700)
+						setTimeout(function(){move = true}, 1000)
+					}
+				})
+				setInterval(function(){
+					if(move == true){
+						if(enemy.getY() < Math.random() * 500){
+							enemy.pushDown(2)
+						}
+						else{
+							enemy.pushUp(2)
+						}
+					}
+				},100)
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>  </h1>
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>

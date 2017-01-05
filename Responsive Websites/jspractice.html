@@ -1,0 +1,114 @@
+<html>
+     <head>
+          <title> JavaScript Practice </title>
+          <script>
+               function start(){
+                    var age=13;
+                    var name="Quinn";
+                    alert(name+" is "+age);
+               };
+               function math(){
+                    var math=5*3.9/3.14-22+23;
+                    alert(math);
+               };
+               function question(){
+                    var question= prompt("What is my favorite color?")
+                    if(question=="blue"){
+                         alert("You know me well.")
+                    }
+                    //Sorry I didn't change it but blue is ma fav.
+                    else{
+                         alert("Nope. You disappoint me.")
+                    }
+               }
+               function rate(){
+                    var question= prompt("How much do you like Java Script 1-10?");
+                    if(question<=3){
+                         alert("You don't Java Script very much. That's a shame. Java Script 4 da win!!!")
+                    }
+                    else if(question<=7){
+                         alert("Well... That's okay I guess... But JavaScript is still awesome!!!")
+                    }
+                    else if(question<=9){
+                         alert("Yeah I agree! JavaScipt is awesome! Though, you realize that I said 1-10 not 1-9 or 1-8")
+                    }
+                    else{
+                         alert("That is the wisest scoring of JavaScript ever! Teach me the power of your wisdom oh great and powerful and wise human(if you are Human)")
+                    }
+               }
+               function change(){
+                    var edit=document.getElementById("find").innerHTML="And Turtles Like Me"
+               }
+               var lol=1
+               function rotate(){
+                    if(lol==1){
+                        var Loopsy=document.getElementById("Loopy").innerHTML="And there";
+                         lol=2
+                    }
+                    else{
+                        var Loopsy=document.getElementById("Loopy").innerHTML="And back";
+                         lol=1
+                    }
+               }
+               var cash=1;
+               function count(){
+                    while(cash==1||cash==3||cash==5||cash==7||cash==9){
+                         alert(cash);
+                         break;
+                    };
+                    cash++;
+               }
+               function numbers(){
+                    for(var i=0; i<11; i+=2){alert(i);break};
+               }
+               var games=["Boss Rush","Boss Rush 2","Minecraft", "Terraria"];
+               var sentence="I Like Turtles And Whoever Is Not Right Is Worng If That Is How They Respond."
+               var array=[]
+               for(var i=0; i<sentence.length; i++){
+                    if(sentence[i]=="r"){
+                         array.push(sentence[i]);
+                    }
+               }
+               var food={favorite:" Food", least:" not food"}
+               function obj(){
+                    var ask=prompt("What is my faorite and least favorite food?");
+                         alert(food[ask])
+               }
+               function morph(){
+                    var edit = document.getElementById("box");
+                    edit.style.backgroundColor="black"
+               }
+          </script>
+          <style>
+               #box{
+                    color: red; background-color: green;
+                    height: 250px; width: 250px;
+               }
+          </style>
+     </head>
+     <body>
+          <div>
+               There are
+               <script>document.writeln(array.length);
+               </script> r's in the sentence: 
+               <script>document.writeln(sentence);
+               </script>
+          </div>
+          A game I like is <span>
+               <script>document.writeln(games[0]);</script>
+          </span>
+          <div id="Loopy">And back</div>
+          <div id="find">I like turtles</div>
+          <input type="button" value="food" onclick="obj()">
+          <input type="button" onclick="rotate()" value="Loops Without Loops ;)">
+          <input type="button" onclick="change()" value="Turtles">
+          <input type="button" onclick="rate()" value="Javascript">
+          <input type="button" onclick="start()" value="Click Me!">
+          <input type="button" onclick="math()" value="math">
+          <input type="button" onclick="question()" value="How well do you know me?">
+          <input type="button" onclick="numbers()" value="even1sinn(no reference here)">
+          <input type="submit" onclick="count()" value="counting odd1sout(plz get the reference)">
+          <input type="button" value="box" onclick="morph()">
+          <div id="box">boxbox</div>
+     </body>
+</html>

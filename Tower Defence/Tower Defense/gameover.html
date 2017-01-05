@@ -1,0 +1,21 @@
+<html>
+	<head>
+		<title> Tower Defense Gameover </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js"></script>
+		<script>
+			function level1(){
+				window.location = "level1.html"
+			}
+			function menu(){
+				window.location = "menu.html"
+			}
+		</script>
+		</head>
+	<body onload="run()">
+		<center>
+			<h1 style="color: red;"> Game Over</h1>
+			<input type="button" style="color:blue; background-color:green; border-radius:50%" onclick="level1()" value="Retry" id="retry">
+			<input type="button" style="color:blue; background-color:green; border-radius:50%" onclick="menu()" value="Menu" id="menu">
+		</center>
+	</body>
+</html>

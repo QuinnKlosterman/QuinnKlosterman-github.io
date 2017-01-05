@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+	<html> 
+		<head> 
+			<title> Tower Defense </title> 
+			<script src="https://simplycoding.org/files/simplyjs/simply.js"></script> 
+			<script> 
+				//2.5
+				function run(){
+					sjs.open("target", 800, 500);
+					//background
+						var background = new sjs.Image("Images/background.png");
+						background.setSize(2400,sjs.getHeight())
+						var view = new sjs.Image("");
+						view.setSize(800, 500);
+						view.moveTo(2400, 500);
+						sjs.scrollable(view, background);
+						sjs.keyDown(LEFT_KEY, function(){
+							view.pushLeft();
+						});
+						sjs.keyDown(RIGHT_KEY, function(){
+							view.pushRight();
+						});
+					//enemy
+					var alive = 20;
+						var totalEnemies = 20;
+						var interval =	setInterval(function(){
+								var enemy = new sjs.Image("Images/bad.gif");
+								enemy.type = "enemy"; 
+								enemy.moveTo(0,390);
+								enemy.noBounds=true;
+								enemy.setSize(50,50);
+								enemy.friction = 0;	
+								enemy.pushRight(3);
+								totalEnemies--
+								if(totalEnemies == 0){
+									clearInterval(interval)
+								}
+							}, 1000);
+						sjs.onHit("blocker", "enemy", function(x,y){
+							y.moveTo(y.getX()-100, y.getY());
+							x.lives--;
+							if(x.lives < 1){x.destroy()};
+						});
+						sjs.onHit("range", "enemy", function(x, y){
+							if(x.fire == true){
+								var gbullet = new sjs.Image("Images/bullet.png");
+								gbullet.type = "bullet";
+								gbullet.moveTo(x.getX()+260, x.getY() + 10);
+								gbullet.setSize(40, 10);
+								gbullet.friction = 0;
+								gbullet.pushLeft(10)
+								gbullet.noBounds = true
+								x.fire = false
+								setTimeout(function(){
+									gbullet.destroy();
+									x.fire = true
+								}, x.firerate)
+							}
+						});
+						sjs.onHit("gunman", "enemy", function(x, y){
+							x.destroy();
+							x.range.destroy();
+							y.moveTo(y.getX() - 200, y.getY());
+						});
+						sjs.onHit("enemy", "bullet", function(x, y){
+							x.destroy();
+							y.destroy();
+							alive --
+							bolts += 10;
+							bolts_text.setText("You have " + bolts + " bolts")
+							if(alive == 0){
+								var eee = new sjs.Text("You Beet dem goodd gob", 20, "green");
+								eee.center().offset(-sjs.gx)
+								var fff = new sjs.Button("Continue", function(){
+									window.location = "level2.html"})
+							}
+						});
+						sjs.onHit("enemy", "right_screen", function(){
+							window.location = "gameover.html"
+						})
+					//tracker
+						var tracker = new sjs.Image("")
+						tracker.type = "tracker"
+						tracker.setSize(1, sjs.getHeight())
+						tracker.moveTo(sjs.getWidth()/2, 0)
+						sjs.onHit("tracker","enemy",function(){
+							var warn = new sjs.Text("ENEMY APPROACHING!!!", 20, "red");
+							warn.moveTo(view.getX()+100, sjs.getHeight()/2);
+							tracker.destroy()
+							setTimeout(function(){
+								warn.destroy()
+							}, 2500);
+						});
+					//land
+						var land = new sjs.Image("");
+						land.type = "land";
+						land.setSize(background.getWidth(), 50);
+						land.moveTo(0, 440);
+						land.node.style.zIndex = -1;
+						sjs.onHit(["blocker", "gunman"], "land", function(x, y){
+							sjs.stoppedBy(x, y);
+						});
+					bolts_text = new sjs.Text("You have "+bolts+ " bolts", 20, "blue");
+					bolts_text.fixed = true
+				}
+				var bolts = 100;
+				var bolts_text;
+				function blocker(){
+					if(bolts>=30){
+						bolts -= 30;
+						bolts_text.setText("You have "+bolts+ " bolts")
+						var blocker = new sjs.Image("Images/block.png");
+						blocker.type = "blocker";
+						blocker.setHeight(50);
+						blocker.center().offset(-sjs.gx,10);
+						blocker.lives = 7;
+						blocker.onMouseDown(function(){
+							blocker.draggable();
+							blocker.follow(sjs.mouse);
+						});
+						blocker.onMouseUp(function(){
+							setTimeout(function(){
+								blocker.undraggable();
+							}, 100)	
+							blocker.unfollow(sjs.mouse);
+							blocker.setGravity();
+						});
+					}
+					else{
+						document.getElementById("block_btn").style.color = "red"
+						setTimeout(function(){
+							document.getElementById("block_btn").style.color = "green"
+						}, 2000)
+					}
+				}
+				function gunman(){
+					if(bolts>=50){
+						bolts -= 50;
+						bolts_text.setText("You have "+bolts+" bolts");
+						var gunman = new sjs.Image("Images/gun.png");
+						gunman.type = "gunman";
+						gunman.setSize(50, 50);
+						gunman.center().offset(-sjs.gx, 20);
+						var range = new sjs.Image("");
+						range.type = "range";
+						range.setSize(300, 50);
+						range.moveTo(gunman.getX() - 300, gunman.getY());
+						range.follow(gunman);
+						range.fire = true;
+						range.firerate = 1500;
+						range.node.style.zIndex = -1;
+						gunman.range = range
+						gunman.onMouseDown(function(){
+							gunman.draggable();
+							gunman.follow(sjs.mouse);
+						});
+						gunman.onMouseUp(function(){
+							gunman.undraggable();
+							gunman.unfollow(sjs.mouse);
+							gunman.setGravity()
+						})
+					}
+					else{
+						document.getElementById("gun_btn").style.color = "red"
+						setTimeout(function(){
+							document.getElementById("gun_btn").style.color = "green"
+						}, 2000)
+					}
+				}
+			</script> 
+			<style>
+				.images{
+					height: 50px;
+					margin: 15px;
+				}
+			</style>
+		</head> 
+		<body onload="run()"> 
+			<center> 
+				<img class="images" src="Images/block.png">
+				<img class="images" src="Images/gun.png">
+				<br/>
+				<input id="block_btn" type="button" value="30 Bolts" style="border-radius: 50%; color: green; background-color: black;" onclick="blocker()">
+				<input id="gun_btn" type="button" value="50 Bolts" style="border-radius: 50%; color: green; background-color: black;" onclick="gunman()">
+			</center>
+			<div id="target" style="overflow:hidden; background-color:blue; margin:auto;"></div> 
+		</body> 
+	</html> 

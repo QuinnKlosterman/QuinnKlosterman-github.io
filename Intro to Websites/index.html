@@ -1,0 +1,95 @@
+<html>
+	<head>
+		<title>Swas the Boss</title>
+		<link type="text/css" rel="stylesheet" href="main.css"/>
+		<script>
+			function banner(){
+				var text = confirm("Did You Really Want to Click on My Banner?");
+				return text;
+			}
+			function answer(){
+				var radio = document.getElementsByName("trivia");
+				var selection = false;
+				var message = "";
+				for( var i = 0; i < radio.length; i++) {
+					if(radio[i].value == "a" && radio[i].checked == true) {
+					selection = true;
+					} //end if statement
+				 }//end for loop
+				 if(selection == true) {
+					message = message + "<b><p style='color:green'>Way to go!</p></b>";
+					} else {
+					message = message + "<b><p style='color:red'>Try again my friend.</p></b>";
+					}
+				document.getElementById("response").innerHTML = message;
+
+			}
+		</script>
+	</head>
+	<body id="body1">
+		<h1>Swas the Boss</h1>
+		<div id="rightside">
+			<p class="p1"> Hoi! I am <u><b>Swas</b></u>. <u><b>Swas the Boss</b></u>. I am <i>the Boss Swas</i>. <b>Swas</b> is my nickname. I own this nickname. I am the all powerful: <b>SWAS!!! BWA HAA HAA!!!</b></p><ol>
+			<div class="divList1">
+				<li class="list1">Simply</li>
+				<li class="list1">Coding</li>
+				<li class="list1">Rocks</li>
+			</div>
+		</div>
+		<div id="leftside">
+			<h2>Math Trivia(<span id="span1">and yes I have the answer remembered by heart</span>)</h2>
+			<p>What are the first 55 digits of pi?</p>
+			<form>
+				<div id="response">
+					
+				</div>
+				<input type="radio" name="trivia" value="a">3.1415926535897932384626433832795028841971675105820<br>
+				<input type="radio" name="trivia" value="b">3.1415926535897932384626433838795028841971575105820<br>
+				<input type="radio" name="trivia" value="c">3.1415926535897933384626433838795020841971675105820<br>
+				<input type="radio" name="trivia" value="d">3.1415926535897932384626433838795028841971675105820<br>
+				<input id="button1" type="button" value="submit" onclick="answer()"> 
+			</form>
+		</div>
+		<img src="http://thumbs.dreamstime.com/thumbimg_4418/44182813.jpg">
+		<img src="http://thumbs.dreamstime.com/thumbimg_5209/52096076.jpg">
+		<hr/>
+		<a href="http://www.simplycoding.org/">Simply Coding</a>
+		<div id="footer">
+			<footer>
+				Created By Swas
+			</footer>
+		</div>
+		<center>Quinn</center>
+		<video width="400" height="220" controls>
+			<source src="http://www.w3schools.com/HTML/mov_bbb.mp4" type="video/mp4">
+			<source src="http://www.w3schools.com/HTML/mov_bbb.ogg" type="video/ogg">
+			Your browser does not support HTML5 video.
+		</video>
+		<audio width="400" height="220" controls autoplay>
+			<source src="http://www.w3schools.com/tags/horse.mp3" type="audio/mpeg">
+		Your browser does not support HTML 5 audio.
+		</audio> 
+		<a href="http://bing.com" onclick="return banner()">
+		<header>teMMiE</header>
+		</a>
+	<nav>
+		<ul id="navmenu">
+			<li class="navitem">
+				<a class="link" href="index.html">
+					Home
+				</a>
+			</li>
+			<li class="navitem">
+				<a class="link" href="games.html">
+					Games
+				</a>
+			</li>
+			<li class="navitem">
+				<a class="link" href="nothing.html">
+					Nothing
+				</a>
+			</li>
+		</ul>
+	</nav>
+	</body>
+</html> 

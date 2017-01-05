@@ -1,0 +1,24 @@
+
+<html>
+	<head>
+		<title> Tower Defense </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js"></script>
+		<script>
+			function start(){
+			sjs.open();
+				var menu = new sjs.Text("Main Menu", 50, "blue")
+				menu.centerH();
+				var lvl1 = new sjs.Button("Level 1", function(){
+					window.location = "level1.html"
+				})
+				lvl1.center();
+				var q = new sjs.Text("Made by Quinn Klosterman", 20, "blue");
+				q.bottom().centerH();
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<h1></h1>
+		<div id="target" style="overflow:hidden; background-color:green; margin:auto;"></div>
+	</body>
+</html>

@@ -1,0 +1,193 @@
+<html>
+	<head>
+		<link type="text/css"rel="stylesheet" href="stylesheet.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<title> Comment Post </title>
+		<script>
+			//Form Validation
+			function validate(){
+				var name=document.getElementById("name");
+				var blank_field=false;
+				if(name.value==""){
+					name.style.backgroundColor="pink";
+					blank_field=true;
+				}
+				else{name.style.backgroundColor="lightgreen"}
+				var title=document.getElementById("title");
+				if(title.value==""){
+					title.style.backgroundColor="pink"
+					blank_field=true
+				}
+				else{title.style.backgroundColor="lightgreen"}
+				var comment=document.getElementById("comment")
+				if(comment.value==""){
+					comment.style.backgroundColor="pink"
+					blank_field=true
+				}
+				else{comment.style.backgroundColor="lightgreen"}
+				var backgroundColor=document.getElementById("backgroundColor")
+				if(backgroundColor.value=="Select Background Color"){
+					backgroundColor.style.backgroundColor="pink"
+					blank_field=true
+				}
+				else{backgroundColor.style.backgroundColor="lightgreen"}
+				var color=document.getElementById("color")
+				if(color.value=="Select Text Color"){
+					color.style.backgroundColor="pink";
+					blank_field=true;
+				}
+				else{color.style.backgroundColor="lightgreen"}
+				//Radio Validation
+				var icon=document.getElementsByName("icon")
+				var radiobtns=document.getElementById("radiobtns")
+				var blank_radio=true
+				for(var i=0;i<icon.length;i++){
+					if(icon[i].checked==true){
+						blank_radio=false;
+					}
+				}
+				if(blank_radio==true){
+					radiobtns.style.border="2px solid red";
+					blank_field=true;
+				}
+				else{radiobtns.style.border="none"}
+				//error message
+				var message=document.getElementById("message")
+				if(blank_field==true){
+					message.innerHTML="Missing Required Items"
+				}
+				else{message.innerHTML=""}
+				add()
+			}//end validate
+			var array=[]
+			function add(){
+				//variables
+				var select_color=document.getElementById("color")
+				var select_bgcolor=document.getElementById("backgroundColor")
+				var title=document.getElementById("title")
+				var name=document.getElementById("name")
+				var comment=document.getElementById("comment")
+				var icon=document.getElementsByName("icon");
+				var icon_value;
+				for(var i=0; i<icon.length; i++){
+					if(icon[i].checked==true){
+						icon_value=icon[i].value;
+					}
+				}
+				var storage={name:name.value,title:title.value,comment:comment.value,icon:icon_value,select_color:select_color.value,select_bgcolor:select_bgcolor.value};
+				array.push(storage);
+				show()
+			}//end add
+			function show(){
+				var display=document.getElementById("display");
+				var post=""
+				for(var i=0; i<array.length; i++){
+					post+="<div style='background-color:"+array[i].select_bgcolor+";'id='bc'>"
+					post+="<span style='color:"+array[i].select_color+";'>"
+					post+= "<img src='"+array[i].icon+"' class='icon' />"; 
+					post+="<strong > "+array[i].name+ "</strong><br>"; 
+					post+="<strong> "+array[i].title+ "</strong><br>"; 
+					post+="<strong> "+array[i].comment+ "</strong><br>"; 
+					post+="<input type='checkbox' onclick='gone("+i+")'"
+					post+="</div></span>"
+				}
+				display.innerHTML=post
+			}//end show
+			function gone(index){
+				array.splice(index,1)
+				show()
+			}
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-10 col-lg-12 " id="logo">
+					<img class="img-responsive" src="https://simplycoding.org/frontend/images/logo-5ef6edabce857170fd5d70f7641dac72.png">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12" id="menu">
+					<ul class="nav nav-tabs">
+						<li><a href="">Home</a></li>
+						<li><a href="">Other stuffs I did</a></li>
+						<li><a href="">Simply Coding</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-12 col-sm-8" id="comments">
+					COMMENTS
+					<div class="col-xs-12 col-sm-4" id="form">
+						<header id="LeaveAComment">
+							Leave a Comment
+						</header>
+						<div id="message"></div>
+						<form class="form-inline">
+							<label>Name:</label>
+								<input type="text" class="form-control" id="name" placeholder="type name">
+								<label>
+									Color
+								</label>
+								<select class="form-control" id="color">
+									<option>
+										Select Text Color
+									</option>
+									<option>
+										Black
+									</option>
+									<option>
+										Green
+									</option>
+									<option>
+										Red
+									</option>
+									<option>
+										Blue
+									</option>
+								</select>
+							</label>
+						</form>
+						<form class="form-horizontal">
+							<label class="control-label">Title</label>
+							<input type="text" class="form-control" placeholder="type title" id="title">
+							<label>Background Color</label>
+							<select class="form-control" id="backgroundColor">
+								<option>
+									Select Background Color
+								</option>
+								<option>
+									White
+								</option>
+								<option>
+									Green
+								</option>
+								<option>
+									Red
+								</option>
+								<option>
+									Blue
+								</option>	
+							</select>
+						</form>
+						<form class="form-inline" id="radiobtns">
+							<label>
+								Icons:
+							</label>
+							<input type="radio" name="icon" value="Images/pizza.png"><img src="Images/pizza.png" class="icon">
+							<input type="radio" name="icon" value="Images/shark_right.png"><img src="Images/shark_right.png" class="icon">
+							<input type="radio" name="icon"value="Images/soccerball.png"><img src="Images/soccerball.png" class="icon">
+							<input type="radio" name="icon" value="Images/ship_left.png"><img src="Images/ship_left.png" class="icon">
+						</form>
+						<label class="control-label">
+							Comment:
+						</label>
+						<textarea class="form-control"row="8" id="comment"></textarea>
+						<input class="btn btn-default" type="button" value="submit" onclick="validate()">
+						<div id="display"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
