@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>  </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open("target", 1345,630);
+				var creditstext= new sjs.Text("welp... that was... a game? Maybe... but if u wanted a real boss fight click the button")
+				var thebutton=new sjs.Button("the button", function(){
+					window.location="bossFight4Realz.html"
+				})
+				thebutton.center()
+			};
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>  </h1>
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>

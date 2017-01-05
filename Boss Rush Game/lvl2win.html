@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> "Win" </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open("target",800,500);
+				 	var distraction = 1;
+					var death = new sjs.Text("Having fun? Press the button saying 'fun time' to continue! Your new prize awaits!",20,"blue");
+					var bad_time = new sjs.Button("fun time",function(){
+						if(distraction==1){
+							death.setText("Hmmm... it didnt work... try it again.");
+							distraction=2;
+						}
+						else if(distraction==2){
+							death.setText("Strange... Unless... okay, try one more time, third time's the charm...")
+							distraction=3;
+						}
+						else if(distraction==3){
+							death.setText("Okay now if you press it then it will create a new button that you can use to advance");
+							distraction=10457618375460859268972354689236582376548972364586732854;
+						}
+						else{
+							death.setText("Ah there it is. Press this new button to advance.")
+							var freedom = new sjs.Button("freedom", function(){
+								window.location="UndertaleReferencesYay.html"
+							});
+							freedom.centerV().right();
+						}
+					});
+					bad_time.setSize(200,340);
+					bad_time.center();
+
+			};
+		</script>
+	</head>
+	<body onload="start()">
+		<h1> "Win" </h1>
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>
+

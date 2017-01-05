@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Boss rush Final Level </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open("target",800,500);
+					var background = new sjs.Image
+						("Images/space.png");
+					rocketFire=true
+					playerRight = true
+					
+					var player = new sjs.Image
+						("Images/battleship_left.png");
+					playerHP=100
+					playerHP_txt=new sjs.Text("Player HP:100",30,"green");
+					playerHP_txt.bottom();
+					player.type = "player";
+					player.friction = .5;
+					player.setSize(80,50);
+					player.accel = .5;
+					player.left().centerV();
+					player.setHFlipImages
+						("Images/battleship_left.png","Images/battleship_right.png");
+					sjs.keyDown(LEFT_KEY, function(){
+						player.pushLeft();
+						player.faceLeft();
+						playerRight = false
+					});
+					sjs.keyDown(RIGHT_KEY, function(){
+						player.pushRight();
+						player.faceRight();
+						playerRight = true
+					});
+					sjs.keyDown(UP_KEY, function(){
+						player.pushUp();
+					});
+					sjs.keyDown(DOWN_KEY, function(){
+						player.pushDown();
+					});
+					if (playerRight == true){
+						player.faceRight();
+					}
+					else {player.faceLeft()}
+					
+					sjs.keyDown(SPACE_KEY, function(){
+						
+						if(rocketFire==true){
+							var rocket = new sjs.Image
+							("Images/titan_left.png");
+							rocket.type="rocket";
+							rocket.setSize(30,10);
+							rocket.friction=0;
+							rocket.accel=.5;
+							rocket.setHFlipImages
+							("Images/titan_left.png","Images/titan_right.png");
+							rocket.noBounds=true
+							rocketFire=false
+								if (playerRight == true){
+									rocket.pushRight(1.5);
+									rocket.faceRight();
+									rocket.moveTo
+										(player.getX()+60,player.getY()+19);
+								}
+								else {
+									rocket.pushLeft(1.5);
+									rocket.faceLeft();
+									rocket.moveTo
+										(player.getX(),player.getY()+19)
+								};
+							setTimeout(function(){
+								rocketFire=true
+							},1000);
+						};	
+						
+					});
+					rocketB_fire=true
+					sjs.keyDown(A_KEY,function(){
+						if(rocketB_fire==true){
+							var rocket2=new sjs.Image("Images/galactica_left.png")
+							rocket2.setSize(30,10)
+							rocket2.accel=.5
+							rocket2.friction=0
+							rocket2.type="rocket2"
+							rocket2.setHFlipImages("Images/galactica_left.png","Images/galactica_right.png")
+							if(playerRight==true){
+								rocket2.moveTo(player.getX()+60, player.getY()+19);
+								rocket2.pushRight(2);
+								rocket2.faceRight();
+								rocketB_fire=false
+								setTimeout(function(){
+									rocketB_fire=true
+								},2000)
+							}
+							else{
+								rocket2.moveTo(player.getX(),player.getY()+19);
+								rocket2.pushLeft(1.5)
+								rocket2.faceLeft()
+							}
+						}
+					})
+					var secondBoss = new sjs.Image
+						("Images/spaceship_left.png");
+					var bossHP = 1000;
+					var bossHP_txt = new sjs.Text("Boss HP:100",28,"red")
+					secondBoss.type = "Boss";
+					secondBoss.accel = .5;
+					secondBoss.friction = .6;
+					secondBoss.setSize(80,60);
+					secondBoss.right().centerV();
+					secondBoss.setHFlipImages
+						("Images/spaceship_left.png","Images/spaceship_right.png");
+					setInterval(function(){
+						setTimeout(function(){
+							secondBoss.moveTo(700, player.getY())
+						},10)
+					},1);
+							setInterval(function(){
+								
+									var rocket_bad = new sjs.Image
+									("Images/laser.png")
+									rocket_bad.setSize(200,20);
+									rocket_bad.type="poo";
+									rocket_bad.friction=0;
+									rocket_bad.accel=.5;
+									rocket_bad.moveTo
+										(secondBoss.getX(), secondBoss.getY()+30);
+									rocket_bad.pushLeft(1.5);
+									rocket_bad.noBounds=true
+									
+								
+							},400);
+						sjs.onHit("player","poo", function(x,y){
+							playerHP=playerHP-50
+							playerHP_txt.setText("playerHP:"+playerHP)
+							y.destroy()
+							if(playerHP<=0){
+								window.location="Lose.html"
+							}
+						})
+					secondBoss.bounce()
+					sjs.onHit("Boss","rocket", function(x,y){
+						bossHP=bossHP-20;
+						bossHP_txt.setText("Boss HP:"+bossHP);
+						y.destroy();
+						if(bossHP<=0){
+							secondBoss.destroy();
+							window.location="lvl3win.html";
+						};
+					});
+					sjs.onHit("Boss","rocket2", function(x,y){
+						bossHP=bossHP+100;
+						bossHP_txt.setText("Boss HP:"+bossHP);
+						y.destroy();
+						if(bossHP>2000){
+							secondBoss.destroy();
+							window.location="Level3Win.html"
+						};
+					});
+					sjs.onHit("player","Boss", function(){
+						window.location="LoseB.html"
+					});
+			};
+		</script>
+	</head>
+	<body onload="start()">
+		<h1> Boss Rush Final Level </h1>
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>
+

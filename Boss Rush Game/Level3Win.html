@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title> You win! </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open("target",1000,100);
+				var txt = new sjs.Text("Thank You so much for playing my game! I hope you enjoyed it! This is my first game that I have created without help from SimplyCoding.org! Special thanks to Simply Coding for teaching me everything that I know about coding! This game would not have been created without them. Click the button to visit their website.")
+				var SimplyCodingRocks = new sjs.Button("SimplyCoding.org",function(){
+					window.location="https://www.simplycoding.org/"
+				});
+				SimplyCodingRocks.bottom().right()
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<h1> You win! </h1>
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>

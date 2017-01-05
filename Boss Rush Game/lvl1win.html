@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title> Level 1 Complete! </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open();
+				var nextlvl= new sjs.Button("Next Level",function(){
+					window.location="lvl2.html"
+				})
+				nextlvl.center();
+				var txt = new sjs.Text("Press A to Use Rocket B!")
+
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<h1> Level 1 Complete! </h1>
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>
