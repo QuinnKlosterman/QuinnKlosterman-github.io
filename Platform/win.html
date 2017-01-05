@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title> Win </title>
+			<script src="https://simplycoding.org/files/simplyjs/simply.js">
+			</script>
+			<script>
+				function start(){
+					sjs.open();
+					var congrats=new sjs.Text("You Win! Congratulations! Here is a button to go back to the menu. Be sure to create your own level and show it to your friends! And I leave you with a final statement: Thanks for Playing!",20,"blue");
+					var menu=new sjs.Button("Menu", function(){
+						window.location="index.html"
+					});
+					menu.center();
+					var scoretxt=new sjs.Text("Score: 0",20,"green");
+					scoretxt.setText("Score: "+localStorage.getItem("score"))
+					scoretxt.bottom().centerH();
+				}
+			</script>
+		</head>
+		<body onload="start()">
+			<h1> You Win </h1>
+
+			<div id="target" style="margin:auto;background:grey;"></div>
+		</body>
+	</html>

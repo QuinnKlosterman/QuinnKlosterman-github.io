@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+	<html>
+		<head>
+			<title> Menu </title>
+			<script src="https://simplycoding.org/files/simplyjs/simply.js">
+			</script>
+			<script>
+				function start(){
+				sjs.open();
+				var platform=new sjs.Text("Platform Game",20,"red");
+				platform.centerH();
+				var friend1=new sjs.Button("Design A Level!", function(){
+					window.location="platform.html"
+				});
+				friend1.center();
+				var friend2=new sjs.Button("Play", function(){
+					window.location="level1.html"
+				});
+				friend2.moveTo(friend1.getX()+45,friend1.getY()+50 )
+				var Tem=new sjs.Text("By Quinn Klosterman",20,"purple");
+				Tem.bottom().centerH();
+				}
+			</script>
+		</head>
+		<body onload="start()">
+			<h1> Platform Game </h1>
+
+			<div id="target" style="margin:auto;background:grey;"></div>
+		</body>
+	</html>

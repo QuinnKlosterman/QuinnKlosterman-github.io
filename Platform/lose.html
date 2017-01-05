@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title> You Lose! </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open();
+				var nextlvl= new sjs.Button("Try Again",function(){
+					window.location="level1.html"
+				});
+				nextlvl.center();
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<h1> You Lose! </h1>
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>
