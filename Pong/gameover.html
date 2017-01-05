@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title> Game Over </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open();
+					//gameover_text and restartButton
+						var gameover_text = new sjs.Text("You Are Bad At Games. You Lost",28,"blue");
+						var restartBtn = new sjs.Button("Restart",function(){window.location = "pong.html";
+						});
+			restartBtn.center();
+			} //end start
+		</script>
+	</head>
+	<body onload="start()">
+		<h1> Game Over! </h1>
+
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>
