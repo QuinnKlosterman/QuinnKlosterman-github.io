@@ -1,0 +1,19 @@
+<html>
+	<head>
+		<script>
+			function retry(){
+				level = "level1"
+				window.location = level + ".html"
+			}
+			function restart(){
+				window.location = "level1.html"
+			}
+		</script>
+	</head>
+	<body style="background-color:blue;">
+		<center>
+			<h1 style="color:red;">You Lose!</h1>
+			<input type="button" value="Retry" style="width:10%;height:5%;margin-top:25%; color:green; background-color:black; border-radius:50%" onclick="retry()"/>
+			<br/>
+			<input type="button" value="Restart" style="width:10%;height:5%;margin-top:1%; color:green; background-color:black; border-radius:50%" onclick="restart()"/>
+		</center>

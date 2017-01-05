@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>  </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				/* ERROR: NULL */
+				/*
+				*TO DO*
+					-NULL
+				*/
+				//BACKGROUND
+				sjs.open("target", 800,600);
+				var background = new sjs.Image("");
+				background.setSize(800, 600);
+				//PLAYER
+				var player = new sjs.Image("Images/player/playerR_idle.png")
+				setTimeout(function(){
+					player.setImage("Images/player/playerR_idle.png")
+				}, 50)
+				player.friction = .7
+				player.accel = .5
+				player.setSize(15,72);
+				player.type = "player"
+				//BACKGROUND (continued)
+				var mapArray = [
+					[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+					[1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1],
+					[1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1],
+					[1,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,1],
+					[1,0,1,0,0,0,1,1,1,1,1,0,0,1,0,0,0,0,0,1],
+					[1,0,1,0,0,0,1,0,0,0,1,0,0,1,0,0,0,0,0,1],
+					[1,0,1,0,0,0,1,0,0,0,1,0,0,1,1,1,1,0,0,1],
+					[1,4,1,0,2,0,1,0,0,0,1,0,0,0,0,3,1,0,0,1],
+					[1,0,0,0,0,0,0,0,0,0,1,0,0,0,0,1,1,0,0,1],
+					[1,0,0,0,0,0,0,0,0,0,1,1,1,1,1,1,0,0,0,1],
+					[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+					[1,0,0,0,2,5,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+					[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+					[1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1],
+					[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+				]
+				var mapX = 0;
+				var mapY = 0;
+				for(var i = 0; i < mapArray.length; i++){
+					for(var j = 0; j < mapArray[i].length; j++){
+						if(mapArray[i][j] == 0){
+							var floor = new sjs.Image("Images/build/wood_floor.png");
+							floor.type = "floor";
+							floor.setSize(40, 40);
+							floor.moveTo(mapX, mapY);
+						}
+						if(mapArray[i][j] == 1){
+							var wall = new sjs.Image("Images/build/stone.png");
+							wall.type = "wall"
+							wall.setSize(40, 40)
+							wall.moveTo(mapX, mapY)
+							/*
+							var wallT = new sjs.Image("")
+							wallT.moveTo(wall.getX(), wall.getY())
+							wallT.type = "wallT"
+							wallT.setSize(39,1)
+							wallT.noBounds = true
+							wallT.node.style.zIndex = -1
+							var wallB = new sjs.Image("")
+							wallB.moveTo(wall.getX(), wall.getY()+40)
+							wallB.type = "wallB"
+							wallB.setSize(39,1)
+							wallB.noBounds = true
+							wallB.node.style.zIndex = -1
+							var wallL = new sjs.Image("")
+							wallL.moveTo(wall.getX(), wall.getY())
+							wallL.type = "wallL"
+							wallL.setSize(1,39)
+							wallL.noBounds = true
+							wallL.node.style.zIndex = -1
+							var wallR = new sjs.Image("")
+							wallR.moveTo(wall.getX()+40, wall.getY())
+							wallR.type = "wallR"
+							wallR.setSize(1,39)
+							wallR.noBounds = true
+							wallR.node.style.zIndex = -1
+							*/
+						}
+						if(mapArray[i][j] == 2){
+							var crate = new sjs.Image("Images/build/crate.png")
+							crate.type = "crate"
+							crate.setSize(40, 40)
+							crate.friction = .7
+							crate.accel = .5
+							crate.node.style.zIndex = 2 
+							crate.moveTo(mapX, mapY)
+							var floor = new sjs.Image("Images/build/wood_floor.png")
+							floor.type = "floor"
+							floor.setSize(40, 40);
+							floor.moveTo(mapX, mapY)
+						}
+						if(mapArray[i][j] == 3){
+							var drop = new sjs.Image("Images/build/drop.png")
+							drop.type = "drop"
+							drop.setSize(40, 40)
+							drop.moveTo(mapX, mapY)
+						}
+						if(mapArray[i][j] == 4){
+							var spawn = new sjs.Image("Images/build/wood_floor.png");
+							spawn.type = "floor"
+							spawn.setSize(40, 40)
+							spawn.moveTo(mapX, mapY)
+							player.moveTo(spawn.getX() + 10, spawn.getY())
+						}
+						if(mapArray[i][j] == 5){
+							var ice = new sjs.Image("Images/build/ice.png")
+							ice.type = "ice";
+							ice.setSize(40, 40);
+							ice.moveTo(mapX, mapY)
+						}
+						mapX += 40
+					}
+					mapX = 0
+					mapY += 40
+				}
+				//VARIABLES
+				var R1 = true;
+				var L1 = true;
+				var R = true;
+				var L = false;
+				var move = false;
+				var push = false;
+				var pushR = false;
+				var pushL = false;
+				var pushU = false;
+				var puhsD = false;
+				var dropping = false;
+				var xMidX;
+				var xMidY;
+				var yMidX;
+				var yMidY;
+				var dropped = 0;
+				var hitWall = false;
+				var playerIm = false;
+				var hFloor = false
+				/*var imageInt = setInterval(function(){
+					if(player.getHeight() <= 70){
+						player.setHeight(80)
+					}
+					else{
+						player.setHeight(70)
+					}
+				}, 2000)*/
+				//COLLISION DETECTION
+				/*sjs.onHit("player", ["wallL", "wallR"], function(x, y){
+					hitWall = true;
+					if(R == false){
+						player.pushRight(.3)
+					}
+					else if(R == true){
+						player.pushLeft(.3)
+					}
+					x.moveTo(player.getX()+35, player.getY()+20)
+				});
+				sjs.onHit("player", "wallT", function(x,y){
+					player.pushUp(.3)
+					x.moveTo(player.getX()+35, player.getY()+20)
+				});
+				sjs.onHit("player", "wallB", function(x,y){
+					player.pushDown(.3)
+					x.moveTo(player.getX()+35, player.getY()+20)
+				})*/
+				sjs.onHit("crate", "floor", function(x,y){
+					if(hFloor == false){
+						hFloor == true;
+						x.friction = .7
+					}
+				})
+				sjs.onHit("player", "wall", function(x,y){
+					sjs.stoppedBy(x,y)
+				})
+				sjs.onHit("player", "crate", function(x,y){
+					if(dropping == false){
+						sjs.stoppedBy(x,y)
+						player.friction = 1;
+						push = true
+						var pc = x.getY() + x.getHeight() - y.getY()
+						if(pc == 0){
+							y.pushDown()
+						}
+						else if(y.getY() + 40 - x.getY() == 0){
+							y.pushUp()
+						}
+						else if(R == true){
+							y.pushRight()
+							pushR = true
+						}
+						else if(R == false){
+							y.pushLeft()
+							pushR = false
+							pushL = true
+						}
+					}
+				});
+				sjs.onHit("crate", "wall", function(x,y){
+					sjs.stoppedBy(x,y)
+				});
+				sjs.onHit("drop", "crate", function(x,y){
+					dropping = true;
+					var dropInt = setInterval(function(){
+						y.setSize(y.getWidth() - 1, y.getHeight() - 1);
+						xMidX = x.getX() + x.getWidth()/2
+						xMidY = x.getY() + x.getHeight()/2
+						yMidX = y.getWidth()/2
+						yMidY = y.getHeight()/2
+						y.moveTo(xMidX - yMidX, xMidY - yMidY);
+						if(y.getHeight() == 0){
+							clearInterval(dropInt)
+							y.destroy()
+							dropped += 1
+							if(dropped == 1){
+								var next = "temp";
+								window.location = next + ".html"
+							}
+						}
+					}, 20)
+					setTimeout(function(){
+						dropping = false
+					},400)
+				});
+				sjs.onHit("crate", "crate", function(x,y){
+					sjs.stoppedBy(x,y)
+				});
+				sjs.onHit("drop", "player", function(x,y){
+					Pdropping = true;
+					var PdropInt = setInterval(function(){
+						y.setHeight(y.getHeight() - y.getHeight()/10);
+						y.setWidth(y.getWidth() - y.getWidth()/10);
+						xMidX = x.getX() + x.getWidth()/2
+						xMidY = x.getY() + x.getHeight()/2
+						yMidX = player.getWidth()/2
+						yMidY = player.getHeight()/2
+						y.moveTo(xMidX - yMidX, xMidY - yMidY);
+						if(y.getHeight() <= 10){
+							clearInterval(PdropInt)
+							y.destroy();
+							window.location = "lose.html"
+						}
+					}, 100)
+					setTimeout(function(){
+						Pdropping = false
+					},400)
+				});
+				sjs.onHit("crate", "ice", function(x,y){
+					if(hFloor == false){
+						x.friction = 0
+					}
+				})
+				//KEYDOWN FUNCTIONS
+				sjs.keyDown(RIGHT_KEY, function(){
+					player.pushRight()
+					R = true
+					if(playerIm == false){
+						player.setImage("Images/player/playerR_walk.gif")
+						player.setWidth(23)
+						playerIm = true
+					}
+				})
+				sjs.keyDown(LEFT_KEY, function(){
+					player.pushLeft()
+					R = false
+					if(playerIm == false){
+						player.setImage("Images/player/playerL_walk.gif");
+						player.setWidth(23)
+						playerIm = true
+					}
+				})
+				sjs.keyDown(UP_KEY, function(){
+					player.pushUp()
+				})
+				sjs.keyDown(DOWN_KEY, function(){
+					player.pushDown()
+				})
+				//EVENT LISTENERS
+				window.addEventListener("keyup",function(e){
+					if(e.keyCode == RIGHT_KEY){
+						player.setImage("Images/player/playerR_idle.png");
+						move = false;
+						pushR = false;
+						pushL = false;
+						push = false;
+						hitWall = false
+						player.setWidth(15)
+						playerIm = false
+					}
+					else if(e.keyCode == LEFT_KEY){
+						player.setImage("Images/player/playerL_idle.png");
+						move = false;
+						pushR = false
+						push = false
+						pushL = false
+						hitWall = false
+						player.setWidth(15)
+						playerIm = false
+					}
+					else if(e.keyCode == UP_KEY){
+						hitWall = false
+					}
+					else if(e.keyCode == DOWN_KEY){
+						hitWall = false
+					};
+				});
+			}
+			function retry(){
+				window.location = "level1.html"
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>  </h1>
+		<center>
+			<input type="button" onclick="retry()" style="border-radius:50%; width:10%; height:10%; color:green; background-color: black; margin:5px" value="reset level">
+		</center>
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>

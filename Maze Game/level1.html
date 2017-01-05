@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>  </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open("target", 800,600);
+
+				/* ERROR: NULL */
+				/* TO-DO: Build */
+
+				//map
+				//map Array for preset levels
+				var mapArray = [
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+					[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				];
+
+				var mapX = 0;
+				var mapY = 0;
+
+				for(var i = 0; i < mapArray.length; i++){
+
+					for(var j = 0; j < mapArray[i].length; j++){
+						if(mapArray[i][j] == 0){
+							var tile = new sjs.Image("");
+							tile.node.style.backgroundColor = "gray";
+							tile.type = "gray";
+							tile.setSize(40,40);
+							tile.moveTo(mapX,mapY);
+						}
+						else if(mapArray[i][j] == 1){
+							var tile = new sjs.Image("");
+							tile.node.style.backgroundColor = "black";
+							tile.type = "black";
+							tile.setSize(40,40);
+							tile.moveTo(mapX , mapY );
+						}
+						mapX += 40
+					}
+					mapX = 0;
+					mapY += 40;
+				}
+
+				//player
+				var player = new sjs.Image("");
+				player.node.style.backgroundColor = "red";
+				player.node.style.zIndex = 1;
+				player.setSize(40,40);
+				player.type = "player";
+				var playerR = new sjs.Image("");
+				playerR.type = "R"
+				playerR.setSize(1,1);
+				playerR.moveTo(player.getX() + 41, player.getY());
+				playerR.noBounds = true;
+				playerR.node.style.zIndex = -1
+				var playerL = new sjs.Image("");
+				playerL.type = "L"
+				playerL.setSize(1,1);
+				playerL.moveTo(player.getX() - 1, player.getY());
+				playerL.noBounds = true;
+				playerL.node.style.zIndex = -1
+				var playerU = new sjs.Image("");
+				playerU.type = "U"
+				playerU.setSize(1,1);
+				playerU.moveTo(player.getX() + 1, player.getY() - 1);
+				playerU.noBounds = true;
+				playerU.node.style.zIndex = -1
+				var playerD = new sjs.Image("");
+				playerD.type = "D"
+				playerD.moveTo(player.getX(), player.getY() + 40);
+				playerD.noBounds = true;
+				playerD.setSize(1,1);
+				playerD.node.style.zIndex = -1
+				var move = function(){
+					playerD.moveTo(player.getX(), player.getY() + 41);
+					playerU.moveTo(player.getX(), player.getY() - 1);
+					playerL.moveTo(player.getX() - 1, player.getY());
+					playerR.moveTo(player.getX() + 41, player.getY());
+				}
+
+				//movement
+				
+				var playerX;
+				var playerY;
+				var canMoveR = true;
+				var canMoveL = true;
+				var canMoveU = true;
+				var canMoveD = true;
+				sjs.keyDown(RIGHT_KEY, function(){
+					if(canMoveR == true){
+						playerX = player.getX() + 40;
+						playerY = player.getY()
+						player.moveTo(playerX,playerY);
+						canMoveR = false;
+						canMoveL = false;
+						canMoveU = false;
+						canMoveD = false;
+						move()
+						setTimeout(function(){
+							canMoveR = true;
+							canMoveL = true;
+							canMoveU = true;
+							canMoveD = true;
+						}, 200)
+					}
+				})
+
+				sjs.keyDown(LEFT_KEY, function(){
+					if(canMoveL == true){
+						playerX = player.getX() - 40;
+						playerY = player.getY()
+						player.moveTo(playerX,playerY);
+						canMoveL = false
+						canMoveR = false
+						canMoveU = false
+						canMoveD = false
+						move()
+						setTimeout(function(){
+							canMoveR = true;
+							canMoveL = true;
+							canMoveU = true;
+							canMoveD = true;
+						}, 200)
+					}
+				})
+
+				sjs.keyDown(DOWN_KEY, function(){
+					if(canMoveD == true){
+						playerX = player.getX();
+						playerY = player.getY() + 40;
+						player.moveTo(playerX,playerY);
+						canMoveD = false
+						canMoveL = false
+						canMoveU = false
+						canMoveR = false
+						move()
+						setTimeout(function(){
+							canMoveR = true;
+							canMoveL = true;
+							canMoveU = true;
+							canMoveD = true;
+						}, 200)
+					}
+				})
+
+				sjs.keyDown(UP_KEY, function(){
+					if(canMoveU == true){
+						playerX = player.getX();
+						playerY = player.getY() - 40;
+						player.moveTo(playerX,playerY);
+						canMoveU = false;
+						canMoveD = false;
+						canMoveL = false;
+						canMoveR = false
+						move()
+						setTimeout(function(){
+							canMoveR = true;
+							canMoveL = true;
+							canMoveU = true;
+							canMoveD = true;
+						}, 200)
+					}
+				})
+
+				sjs.onHit("D", "black", function(x,y){
+					canMoveD = false;
+				});
+				sjs.onHit("U", "black", function(){
+					canMoveU = false;
+				});
+				sjs.onHit("L", "black", function(){
+					canMoveL = false;
+				})
+				sjs.onHit("R", "black", function(){
+					canMoveR = false;
+				})
+
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<div id="target" style="margin:auto;background:white;"></div>
+	</body>
+ </html>

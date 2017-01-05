@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>  </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open("target", 1345,630);
+				//variable definition
+					var tmps = 0
+					var balance = 400
+					var bText = new sjs.Text("$20")
+				//functions
+					var purchase = function(x,y){
+						tmps += x
+						balance -= y
+					} 
+					var mInt = setInterval(function(){
+						balance += tmps
+						bText.setText("$" + balance)
+					}, 1000)
+				//buttons
+					var wcost = 200;
+					var rcost = 20;
+					var rakes = new sjs.Button("$20", function(){
+						if(rcost <= balance){
+							var rmps = 1;
+							var rcost = 20;
+							purchase(rmps,rcost);
+						}
+					})
+					rakes.moveTo(100,10)
+					var wash = new sjs.Button("$200", function(){
+						if(balance >= wcost){
+							var wmps = 13;
+							var wcost = 200;
+							purchase(wmps,wcost);
+						}
+					})
+					wash.moveTo(100,40)
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>  </h1>
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>
