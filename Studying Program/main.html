@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>  </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<script>
+			function start(){
+				sjs.open("target", 1000,630);
+				//change var anum to equal the # of items in array aaa-1
+				//change var bnum to equal the # of items in array bbb-1
+				var num = 4;
+				var a;
+				var b;
+				var c;
+				var d;
+				var aa;
+				var bb;
+				var bc;
+				var bd;
+				var wa;
+				var wb;
+				var wc;
+				var wd;
+				var asdf = false;
+				var aaa = ["1","2","3","4"]
+				var bbb = ["w","x","y","z"]
+				var pos = [200,400,600,800]
+				var ask = new sjs.Button("Press me!", function(){
+					while(asdf == false){
+						a = Math.floor(Math.random()*num)
+						b = Math.floor(Math.random()*num)
+						c = Math.floor(Math.random()*num)
+						d = Math.floor(Math.random()*num)
+						console.log(a, b, c, d)
+						if(a!=b && a!=c && a!=d && b!= c && b!=d && c!=d){asdf = true}
+					}
+					aa = aaa[a];
+					wa = bbb[a];
+					wb = bbb[b];
+					wc = bbb[c];
+					wd = bbb[d];
+					console.log(aa, wa, wb, wc, wd)
+					ab = new sjs.Button(wa, function(){
+						alert("correct");
+					})
+					ab.moveTo(pos[a], 300);
+					bb = new sjs.Button(wb, function(){
+						alert("incorrect");
+					})
+					bb.moveTo(pos[b], 300);
+					bc = new sjs.Button(wc, function(){
+						alert("incorrect");
+					})
+					bc.moveTo(pos[c], 300);
+					bd = new sjs.Button(wd, function(){
+						alert("incorrect");
+					})
+					bd.moveTo(pos[d], 300);
+					alert(aa);
+				})
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>  </h1>
+		<div id="target" style="margin:auto;background:grey;"></div>
+	</body>
+ </html>

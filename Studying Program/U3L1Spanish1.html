@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>  </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<style>
+		button{
+			border-radius: 50%;
+			border-color: green;
+			background: green;
+		}
+		</style>
+		<script>
+			function start(){
+				sjs.open("target", 1000,630);
+				//change var num to equal the # of items in array total # of items in aaa
+				var num = 67;
+				var a;
+				var b;
+				var c;
+				var d;
+				var aa;
+				var bb;
+				var bc;
+				var bd;
+				var wa;
+				var wb;
+				var wc;
+				var wd;
+				var asdf = false;
+				var aaa = ["breakfast","lunch","afternoon snack","special","to fell like","to be hungry","to be thirsty","water","milkshake","coffee","juice","apple","orange","grape","milk","sugar","ketchup","butter","mayo","mustard","pepper","salt","rice","steak","cereal","meat","pork","beef","salad","fruit","hamburger","egg","ham","shelfish","bread","potato","toast","turkey","fish","chicken","cheese","sandwich","soup","bacon","vegies","yogurt","desert","how","which","when","where","why","what","who","hot","cold","horrible","nutritious","spicy","tasty(rich)","tasty(flavorful)","now","its important","other","for","the bill"]
+				var bbb = ["el desayuno","el almuerzo","la merienda","la especial","tener ganas de","tener hambre","tener sed","el agua","el batido","el cafe","el jugo","la manzana","la naranja","la uva","la leche","el azucar","el katsup","la mantequilla","la mayonessa","la mostoza","la pimienta","la sal","el arroz","el bistec","el cereal","la carne","cerdo","res","la ensalada","la fruta","la hamburguesa","el huevo","el jamon","los mariscos","el pan","la papa","el pan tostado","el pavo","el pescado","el pollo","el queso","el sandwich","la sopa","el tocino","las vaduras","el yogur","el postre","como","cual", "cuando","donde","por que","que","quien","caliente","frio","horrible","nutritivo","picante","rico","sambroso","ahora","es importante","otro","para","la cuenta"]
+				var pos = [200,400,600,800]
+					while(asdf == false){
+						a = Math.floor(Math.random()*num)
+						b = Math.floor(Math.random()*num)
+						c = Math.floor(Math.random()*num)
+						d = Math.floor(Math.random()*num)
+						var an = Math.floor(Math.random()*4)
+						var bn = Math.floor(Math.random()*4)
+						var cn = Math.floor(Math.random()*4)
+						var dn = Math.floor(Math.random()*4)
+						console.log(a, b, c, d, an, bn, cn, dn)
+						if(a!=b && a!=c && a!=d && b!= c && b!=d && c!=d && an!=bn && an!=cn && an!=dn && bn!=cn && cn!=dn && bn!=dn){asdf = true}
+					}
+					aa = aaa[a];
+					wa = bbb[a];
+					wb = bbb[b];
+					wc = bbb[c];
+					wd = bbb[d];
+					console.log(aa, wa, wb, wc, wd)
+					ab = new sjs.Button(wa, function(){
+						ask.innerHTML = "correct"
+						setTimeout(function(){window.location="U3L1Spanish1.html"},500)
+					})
+					ab.moveTo(200*an+190, 300);
+					bb = new sjs.Button(wb, function(){
+						alert("incorrect");
+					})
+					bb.moveTo(200*bn+190, 300);
+					bc = new sjs.Button(wc, function(){
+						alert("incorrect");
+					})
+					bc.moveTo(200*cn+190, 300);
+					bd = new sjs.Button(wd, function(){
+						alert("incorrect");
+					})
+					bd.moveTo(200*dn+190, 300);
+					ask = document.getElementById("ask")
+					ask.innerHTML = aa
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>  </h1>
+		<center><div id="ask" style="color:red;font-family: Papyrus; font-size:20px"></div></center>
+		<div id="target" style="margin:auto;background:teal;"></div>
+	</body>
+ </html>
