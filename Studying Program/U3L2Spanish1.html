@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+ <html>
+	<head>
+		<title>  </title>
+		<script src="https://simplycoding.org/files/simplyjs/simply.js">
+		</script>
+		<style>
+		button{
+			border-radius: 50%;
+			border-color: green;
+			background: green;
+		}
+		</style>
+		<script>
+			function start(){
+				sjs.open("target", 1000,630);
+				//change var num to equal the # of items in array total # of items in aaa
+				var num = 34;
+				var a;
+				var b;
+				var c;
+				var d;
+				var aa;
+				var bb;
+				var bc;
+				var bd;
+				var wa;
+				var wb;
+				var wc;
+				var wd;
+				var asdf = false;
+				var aaa = ["abuelo(a)","la familia","hermano(a)","hijo(a)","esposo(a)","hermanastro(a)","medio hermano(a)","nieto(a)","sobrino(a)","bebe","madrasta/padrasto","madre/padre","primo(a)","tio(a)","?Cual es la fecha?","Es el... of...","el primo de...","cumpleanos","Faliz cumpleanos","la fecha de nacimiento","gato(a)","perro(a)","pajaro(a)","pez","conejo","rana","hamster","?cuanto anos tienes?","Tengo... anos","mayor","menor","ya","vivir"]
+				var bbb = ["gandparent","family","sibling","child","spouse","step-sibling","half-sibling","grandchild","neice/nephew","baby","step-mom/dad","mom/dad","cousin","aunt/uncle","What is the date?","It's the... of...","the first of...","b-day","happy b-day","birth date","cat","dog","bird","fish","rabit","frog","hamster","how old are you?","I'm... years old","older","younger","already","to live"]
+				var pos = [200,400,600,800]
+					while(asdf == false){
+						a = Math.floor(Math.random()*num)
+						b = Math.floor(Math.random()*num)
+						c = Math.floor(Math.random()*num)
+						d = Math.floor(Math.random()*num)
+						var an = Math.floor(Math.random()*4)
+						var bn = Math.floor(Math.random()*4)
+						var cn = Math.floor(Math.random()*4)
+						var dn = Math.floor(Math.random()*4)
+						console.log(a, b, c, d, an, bn, cn, dn)
+						if(a!=b && a!=c && a!=d && b!= c && b!=d && c!=d && an!=bn && an!=cn && an!=dn && bn!=cn && cn!=dn && bn!=dn){asdf = true}
+					}
+					aa = aaa[a];
+					wa = bbb[a];
+					wb = bbb[b];
+					wc = bbb[c];
+					wd = bbb[d];
+					console.log(aa, wa, wb, wc, wd)
+					ab = new sjs.Button(wa, function(){
+						ask.innerHTML = "correct"
+						setTimeout(function(){window.location="U3L2Spanish1.html"},500)
+					})
+					ab.moveTo(200*an+170, 300);
+					bb = new sjs.Button(wb, function(){
+						alert("incorrect");
+					})
+					bb.moveTo(200*bn+170, 300);
+					bc = new sjs.Button(wc, function(){
+						alert("incorrect");
+					})
+					bc.moveTo(200*cn+170, 300);
+					bd = new sjs.Button(wd, function(){
+						alert("incorrect");
+					})
+					bd.moveTo(200*dn+170, 300);
+					ask = document.getElementById("ask")
+					ask.innerHTML = aa
+			}
+		</script>
+	</head>
+	<body onload="start()">
+		<h1>  </h1>
+		<center><div id="ask" style="color:red;font-family: Papyrus; font-size:20px"></div></center>
+		<div id="target" style="margin:auto;background:teal;width:auto"></div>
+	</body>
+ </html>
